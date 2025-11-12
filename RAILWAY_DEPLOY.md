@@ -10,6 +10,11 @@ The `railway.toml` file configures:
 - Health check settings
 - Restart policy
 
+The `docker-entrypoint.sh` script automatically:
+- Fixes volume permissions (Railway volumes are owned by root)
+- Drops privileges to the `rails` user before starting the app
+- This solves the "Permission denied @ dir_s_mkdir" error
+
 ## What You Need to Configure Manually
 
 ### 1. Create a Volume (Required)
