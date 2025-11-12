@@ -27,8 +27,7 @@ Campfire needs persistent storage for the SQLite database and file attachments.
 
 ```bash
 # Required
-SECRET_KEY_BASE=<generate with: rails secret>
-RAILS_MASTER_KEY=<from config/master.key or generate new>
+SECRET_KEY_BASE=<paste the generated value below>
 
 # Recommended
 DISABLE_SSL=true  # Railway handles SSL for you
@@ -38,17 +37,24 @@ DISABLE_SSL=true  # Railway handles SSL for you
 - `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` - For push notifications
 - `SENTRY_DSN` - For error tracking
 
-### 3. Generate Secrets
+### 3. Generate SECRET_KEY_BASE
+
+Run this command on your local machine (no Ruby needed):
 
 ```bash
-# Generate SECRET_KEY_BASE
-rails secret
-# or
 openssl rand -hex 64
+```
 
-# For VAPID keys (after deployment, run in Railway shell)
+Copy the output and paste it into Railway's `SECRET_KEY_BASE` environment variable.
+
+**Optional: Generate VAPID keys for push notifications**
+
+After deployment, open Railway shell and run:
+```bash
 ./script/admin/create-vapid-key
 ```
+
+Then add the output to Railway environment variables.
 
 
 ## First-Time Setup
